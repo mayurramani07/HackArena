@@ -42,3 +42,26 @@ exports.fetchCodeforces = async (req, res) => {
         res.status(500).json({ error: "Failed to fetch Codeforces contests." });
     }
 };
+
+exports.fetchAtCoder = async (req, res) => {
+    try {
+        const response = await axios.get('https://atcoder.jp/contests/');
+        const $ = cheerio.load(response.data);
+
+        let contests = [];
+        $('.table tbody tr').each((index, element) => {
+            const titleElement = $(element).find('td a');
+            const title = titleElement.text().trim();
+            const url = "https://atcoder.jp" + titleElement.attr('href');
+            const startTime = $(element).find('td').eq(0).text().trim();
+
+            if (title && startTime) {
+                contests.push({ title, startTime, url });
+            }
+        });
+
+        res.json(contests);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to fetch AtCoder contests." });
+    }
+};
