@@ -24,3 +24,21 @@ exports.fetchLeetCode = async (req, res) => {
         res.status(500).json({ error: "Failed to fetch LeetCode contests." });
     }
 };
+
+exports.fetchCodeforces = async (req, res) => {
+    try {
+        const response = await axios.get('https://codeforces.com/api/contest.list');
+        const contests = response.data.result
+            .filter(contest => contest.phase === 'BEFORE')
+            .map(contest => ({
+                title: contest.name,
+                startTime: formatDate(contest.startTimeSeconds),
+                duration: contest.durationSeconds / 60 + " minutes",
+                url: `https://codeforces.com/contest/${contest.id}`
+            }));
+
+        res.json(contests);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to fetch Codeforces contests." });
+    }
+};
