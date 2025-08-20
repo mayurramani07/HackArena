@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const { fetchLeetCode, fetchCodeforces, fetchAtCoder } = require('../controllers/contestController');
+const express = require("express");
+const { getAllContests, updateContests } = require("../controllers/contestController");
 
-router.get('/leetcode', fetchLeetCode);
-router.get('/codeforces', fetchCodeforces);
-router.get('/atcoder', fetchAtCoder);
+const router = express.Router();
+
+router.get("/", getAllContests);       
+router.post("/refresh", updateContests); 
 
 module.exports = router;

@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const contestRoutes = require('./routes/contestRoutes');
+require("./cron/contestCron");
 
 
 dotenv.config();
@@ -13,8 +14,10 @@ const app = express();
 app.use(express.json());
 
 
-app.use("/api/auth", authRoutes);
-app.use('/api/contests', contestRoutes);
+// app.use("/api/auth", authRoutes);
+// app.use('/api/contests', contestRoutes);
+
+app.use("/api/contests", contestRoutes);
 
 app.get("/", (req,res) => {
     res.send("JAI SHREE RAM");
