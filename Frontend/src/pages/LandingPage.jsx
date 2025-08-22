@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LandingNavbar from "../components/LandingNavbar";
 
 const LandingPage = () => {
   const navigate = useNavigate();
   const [hoverSide, setHoverSide] = useState(""); 
 
   return (
+    <>
+    <LandingNavbar />
     <div
       className={`relative w-full h-screen flex overflow-hidden transition-all duration-1000 ${hoverSide === "left" ? "hover-left" : hoverSide === "right" ? "hover-right" : "" }`}>
       <div
@@ -39,6 +42,7 @@ const LandingPage = () => {
         .hover-right .left { width: 30% !important; }
       `}</style>
     </div>
+    </>
   );
 };
 
