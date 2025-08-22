@@ -17,7 +17,7 @@ const LandingPage = () => {
         onMouseLeave={() => setHoverSide("")}
         onClick={() => navigate("/hackathons")}>
 
-        <h1 className="text-5xl md:text-6xl font-serif absolute top-1/4 text-black">Hackathons</h1>
+        <h1 className="text-5xl md:text-6xl font-serif absolute top-1/3 text-black">Hackathons</h1>
         <button className="btn absolute top-1/2 px-10 py-6 border-2 border-black rounded-xl font-bold uppercase text-black hover:bg-black hover:text-white transition-all duration-300">
           Explore
         </button>
@@ -28,7 +28,7 @@ const LandingPage = () => {
         onMouseLeave={() => setHoverSide("")}
         onClick={() => navigate("/contests")}
       >
-        <h1 className="text-5xl md:text-6xl font-serif absolute top-1/4 text-white">
+        <h1 className="text-5xl md:text-6xl font-serif absolute top-1/3 text-white">
           Contests
         </h1>
         <button className="btn absolute top-1/2 px-10 py-6 border-2 border-white rounded-xl font-bold uppercase text-white hover:bg-white hover:text-black transition-all duration-300">
