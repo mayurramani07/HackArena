@@ -4,6 +4,7 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const contestRoutes = require('./routes/contestRoutes');
 const hackathonRoutes = require("./routes/hackathonRoutes");
+const cors = require("cors");
 require("./cron/contestCron");
 require("./cron/hackathonCron");
 
@@ -15,6 +16,7 @@ connectDB();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 
 // app.use("/api/auth", authRoutes);
