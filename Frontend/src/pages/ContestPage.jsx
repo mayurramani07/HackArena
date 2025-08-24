@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ContestNavbar from "../components/ContestNavbar";
-import ContestFooter from "../components/ContestFooter";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { FaRegBookmark, FaBookmark, FaCalendarAlt, FaClock, FaExternalLinkAlt } from "react-icons/fa";
 import { fetchContests } from "../services/contestService.js";
 
@@ -71,7 +71,7 @@ const ContestPage = () => {
 
   return (
     <div className="bg-black min-h-screen text-white pt-20">
-      <ContestNavbar />
+      <Navbar />
       <div className="px-6 md:px-16 pt-12">
         <h1 className="text-4xl font-bold mb-8">All Contests</h1>
 
@@ -93,7 +93,7 @@ const ContestPage = () => {
           </div>
         )}
       </div>
-      <ContestFooter />
+      <Footer />
     </div>
   );
 };
