@@ -12,6 +12,7 @@ function App() {
         <Route path="/contests" element={<ContestPage />}/>
         <Route path="/hackathons" element={<HackathonPage/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/hackathons" element={<HackathonPage/>} />
       </Routes>
     </Router>
   );
