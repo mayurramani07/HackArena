@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 
-const Login = () => {
+const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -13,26 +14,33 @@ const Login = () => {
     e.preventDefault();
     setErrorMessage("");
 
-    if (!email || !password) {
-      setErrorMessage("Please enter both email and password.");
+    if (!email || !password || !confirmPassword) {
+      setErrorMessage("Please fill all fields.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
       return;
     }
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:7000/api/auth/login", {
+      const res = await axios.post("http://localhost:7000/api/auth/register", {
         email,
         password,
       });
 
       if (res.data && res.data.token) {
         localStorage.setItem("token", res.data.token);
-        window.location.href = "/dashboard";
+        window.location.href = "/home"; 
       } else {
         setErrorMessage("Unexpected response from server.");
       }
     } catch (err) {
-      setErrorMessage(err.response?.data?.message || "Login failed. Please try again.");
+      setErrorMessage(
+        err.response?.data?.message || "Signup failed. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -44,7 +52,7 @@ const Login = () => {
         <div className="bg-white text-black rounded-2xl shadow-xl p-6 sm:p-8">
           <div className="mb-6 text-center">
             <h1 className="text-2xl sm:text-3xl font-bold">HackArena</h1>
-            <p className="text-sm text-neutral-600 mt-1">Login to continue</p>
+            <p className="text-sm text-neutral-600 mt-1">Create your account</p>
           </div>
 
           {errorMessage && (
@@ -63,10 +71,10 @@ const Login = () => {
                   placeholder="ramanimayur@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  autoComplete="email"/>
+                  autoComplete="email"
+                />
               </div>
             </label>
-
             <label className="block">
               <span className="mb-1 block text-sm font-medium">Password</span>
               <div className="flex items-center gap-2 rounded-xl border border-neutral-200 bg-white px-3 py-2 focus-within:ring-2 focus-within:ring-black/80">
@@ -76,38 +84,51 @@ const Login = () => {
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  autoComplete="current-password"/>
+                  autoComplete="new-password"
+                />
                 <button
                   type="button"
                   onClick={() => setShowPassword((s) => !s)}
                   className="p-1 rounded-lg hover:bg-neutral-100"
-                  aria-label={showPassword ? "Hide password" : "Show password"}>
-                  {showPassword ? <FaEyeSlash className="h-4 w-4" /> : <FaEye className="h-4 w-4" />}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? (
+                    <FaEyeSlash className="h-4 w-4" />
+                  ) : (
+                    <FaEye className="h-4 w-4" />
+                  )}
                 </button>
               </div>
             </label>
-
-            {/* <div className="flex items-center justify-between text-sm">
-              <label className="flex items-center gap-2">
-                <input type="checkbox" className="h-4 w-4 rounded border-neutral-300" />
-                <span>Remember me</span>
-              </label>
-              <a href="#" className="text-black/70 hover:text-black underline">
-                Forgot password?
-              </a>
-            </div> */}
+            <label className="block">
+              <span className="mb-1 block text-sm font-medium">
+                Confirm Password
+              </span>
+              <div className="flex items-center gap-2 rounded-xl border border-neutral-200 bg-white px-3 py-2 focus-within:ring-2 focus-within:ring-black/80">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="w-full bg-transparent outline-none text-sm"
+                  placeholder="Re-enter your password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  autoComplete="new-password"
+                />
+              </div>
+            </label>
 
             <button
               type="submit"
               disabled={loading}
               className="w-full rounded-xl bg-black text-white py-2.5 text-sm font-medium shadow hover:opacity-90 active:opacity-80 disabled:opacity-60 disabled:cursor-not-allowed">
-              {loading ? "Signing in…" : "Login"}
+              {loading ? "Creating account…" : "Sign Up"}
             </button>
           </form>
 
           <div className="mt-6 text-center text-sm text-neutral-600">
-            Don’t have an account?{" "}
-            <a href="/signup" className="text-black underline">Sign up</a>
+            Already have an account?{" "}
+            <a href="/login" className="text-black underline">
+              Login
+            </a>
           </div>
         </div>
 
@@ -119,4 +140,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

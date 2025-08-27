@@ -8,9 +8,6 @@ const Navbar = () => {
          <Link to="/login"className="text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all">Login</Link>
          <Link to="/logout" className="text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all">Logout</Link>
          <Link to="/more" className="text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all">Explore More</Link>
-        <a href="#login"className="text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all">Login</a>
-        <a href="#logout" className="text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all">Logout</a>
-        <a href="#more" className="text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all">Explore More</a>
       </div>
     </nav>
   );
