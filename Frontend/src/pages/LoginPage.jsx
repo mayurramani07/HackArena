@@ -20,16 +20,16 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:7000/api/auth/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "http://localhost:7000/api/auth/login",
+        { email, password },
+        { withCredentials: true }
+      );
 
-      if (res.data && res.data.token) {
-        localStorage.setItem("token", res.data.token);
-        window.location.href = "/dashboard";
+      if (res.data && res.data.success) {
+        window.location.href = "/";
       } else {
-        setErrorMessage("Unexpected response from server.");
+        setErrorMessage("Login failed. Please try again.");
       }
     } catch (err) {
       setErrorMessage(err.response?.data?.message || "Login failed. Please try again.");

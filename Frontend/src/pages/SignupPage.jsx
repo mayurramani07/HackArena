@@ -33,7 +33,7 @@ const Signup = () => {
 
       if (res.data && res.data.token) {
         localStorage.setItem("token", res.data.token);
-        window.location.href = "/home"; 
+        window.location.href = "/"; 
       } else {
         setErrorMessage("Unexpected response from server.");
       }
