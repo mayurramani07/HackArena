@@ -4,6 +4,7 @@ import ContestPage from "./pages/ContestPage";
 import HackathonPage from "./pages/HackathonPage";
 import Login from "./pages/LoginPage";
 import Signup from "./pages/SignupPage";
+import Feedback from "./pages/Feedbackpage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/hackathons" element={<HackathonPage/>} />
+        <Route path="/feedback" element={<Feedback/>}/>
       </Routes>
     </Router>
   );

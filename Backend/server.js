@@ -5,6 +5,7 @@ const authRoutes = require("./routes/authRoutes");
 const contestRoutes = require('./routes/contestRoutes');
 const hackathonRoutes = require("./routes/hackathonRoutes");
 const cookieParser = require("cookie-parser");
+const feedbackRoutes = require("./routes/feedbackRoutes");
 const cors = require("cors");
 require("./cron/contestCron");
 require("./cron/hackathonCron");
@@ -30,6 +31,7 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/contests", contestRoutes);
 app.use("/api/hackathons", hackathonRoutes);
+app.use("/api", feedbackRoutes);
 
 app.get("/", (req, res) => {
   res.send("JAI SHREE RAM");
