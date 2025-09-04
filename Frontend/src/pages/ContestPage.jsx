@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { FaRegBookmark, FaBookmark, FaCalendarAlt, FaClock, FaExternalLinkAlt } from "react-icons/fa";
@@ -11,7 +13,7 @@ const getStatus = (startTime, endTime) => {
   return "Ongoing";
 };
 
-const ContestCard = ({ contest, onBookmarkToggle }) => {
+const ContestCard = ({ contest, onBookmarkToggle, handleVisitContest }) => {
   const status = getStatus(contest.startTime, contest.endTime);
 
   return (
@@ -46,10 +48,10 @@ const ContestCard = ({ contest, onBookmarkToggle }) => {
       </div>
 
       <div className="flex justify-between items-center mt-5">
-        <a href={contest.url} target="_blank" rel="noopener noreferrer"
+        <button
+          onClick={() => handleVisitContest(contest.url)}
           className="flex items-center gap-2 text-indigo-600 font-medium text-sm hover:underline">
-          Visit Contest <FaExternalLinkAlt className="text-xs" />
-        </a>
+          Visit Contest <FaExternalLinkAlt className="text-xs" /></button>
         <button
           onClick={() => onBookmarkToggle(contest.id)}
           className="text-xl">
@@ -66,6 +68,22 @@ const ContestPage = () => {
   const [contests, setContests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState("All");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await axios.get("http://localhost:7000/api/auth/check", {
+          withCredentials: true,
+        });
+        setIsLoggedIn(res.data.loggedIn);
+      } catch (err) {
+        setIsLoggedIn(false);
+      }
+    };
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     const loadContests = async () => {
@@ -83,6 +101,14 @@ const ContestPage = () => {
         c.id === id ? { ...c, bookmarked: !c.bookmarked } : c
       )
     );
+  };
+
+  const handleVisitContest = (url) => {
+    if (isLoggedIn) {
+      window.open(url, "_blank", "noopener,noreferrer");
+    } else {
+      navigate("/login");
+    }
   };
 
   const filteredContests = contests.filter((contest) => {
@@ -117,6 +143,7 @@ const ContestPage = () => {
                 key={contest.id}
                 contest={contest}
                 onBookmarkToggle={handleBookmarkToggle}
+                handleVisitContest={handleVisitContest}
               />
             ))}
           </div>
