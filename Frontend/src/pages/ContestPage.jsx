@@ -3,18 +3,30 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ContestCard from "../components/ContestCard";
-import { loadContests, handleBookmarkToggle, handleVisitContest, checkUserAuth } from "../controllers/contestController";
+import {
+  loadContests,
+  handleBookmarkToggle,
+  handleVisitContest,
+  checkUserAuth,
+} from "../services/contestService";
 
 const ContestPage = () => {
   const [contests, setContests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState("All");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
 
-  useEffect(() => { checkUserAuth(setIsLoggedIn); }, []);
-  useEffect(() => { loadContests(setContests, setLoading); }, []);
+  useEffect(() => {
+    checkUserAuth(setIsLoggedIn, setUser);
+  }, []);
+
+
+  useEffect(() => {
+    loadContests(setContests, setLoading);
+  }, []);
 
   const filteredContests = contests.filter((contest) => {
     if (activeFilter === "All") return true;
@@ -29,15 +41,21 @@ const ContestPage = () => {
         <h1 className="text-3xl font-bold mb-8">All Contests</h1>
 
         <div className="flex gap-3 mb-8 flex-wrap">
-          {["All", "Codeforces", "LeetCode", "AtCoder", "Bookmark"].map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`px-4 py-2 rounded-lg transition font-medium ${
-                activeFilter === filter ? "bg-gray-700 text-white" : "bg-gray-200 text-black hover:bg-gray-300"}`}>
-              {filter}
-            </button>
-          ))}
+          {["All", "Codeforces", "LeetCode", "AtCoder", "Bookmark"].map(
+            (filter) => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-4 py-2 rounded-lg transition font-medium ${
+                  activeFilter === filter
+                    ? "bg-gray-700 text-white"
+                    : "bg-gray-200 text-black hover:bg-gray-300"
+                }`}
+              >
+                {filter}
+              </button>
+            )
+          )}
         </div>
 
         {loading ? (
@@ -50,9 +68,14 @@ const ContestPage = () => {
               <ContestCard
                 key={contest.id}
                 contest={contest}
-                onBookmarkToggle={(id) => handleBookmarkToggle(id, contests, setContests)}
-                handleVisitContest={(url) => handleVisitContest(url, isLoggedIn, navigate)}
+                onBookmarkToggle={(id) =>
+                  handleBookmarkToggle(id, contests, setContests)
+                }
+                handleVisitContest={(url) =>
+                  handleVisitContest(url, isLoggedIn, navigate)
+                }
                 isLoggedIn={isLoggedIn}
+                user={user}
               />
             ))}
           </div>
