@@ -40,9 +40,9 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 w-full flex justify-between items-center px-6 py-4 z-50 bg-black">
-      <div className="text-2xl font-bold text-white cursor-pointer">
+      <Link to='/' className="text-2xl font-bold text-white cursor-pointer">
         HackArena
-      </div>
+      </Link>
       <div className="flex gap-6">
         {isLoggedIn ? (
           <button onClick={handleLogout} className="text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all">

@@ -1,4 +1,3 @@
-// import { v4 as uuidv4 } from "uuid";  // ❌ Not needed now
 
 export const loadContests = async (setContests, setLoading) => {
   try {
@@ -11,8 +10,8 @@ export const loadContests = async (setContests, setLoading) => {
     setContests(
       data.map((c) => ({
         ...c,
-        bookmarked: c.reminder || false, // 👈 backend ka reminder use karo
-        id: c.url,        // stable identifier
+        bookmarked: c.reminder || false, 
+        id: c.url,       
       }))
     );
   } catch (err) {

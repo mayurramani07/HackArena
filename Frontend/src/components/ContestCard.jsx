@@ -26,7 +26,6 @@ const ContestCard = ({
   const [reminderSet, setReminderSet] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // ✅ Check if reminder already exists
   useEffect(() => {
     if (!user) return;
 
@@ -48,15 +47,13 @@ const ContestCard = ({
 
     checkReminder();
   }, [user, contest.id]);
-
-  // ✅ Handle reminder creation
   const handleRemindMe = async () => {
     if (!user) return alert("Login required to set a reminder!");
 
     setLoading(true);
     try {
       await axios.post(
-        "http://localhost:7000/api/reminders/remind-me", // ✅ fixed route
+        "http://localhost:7000/api/reminders/remind-me", 
         {
           name: user.name || user.email,
           email: user.email,

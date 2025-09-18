@@ -7,6 +7,7 @@ const hackathonRoutes = require("./routes/hackathonRoutes");
 const cookieParser = require("cookie-parser");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const remindMeRoutes = require("./routes/remindMeRoutes");
+// const hackathonReminderRoutes = require("./routes/hackathonReminderRoutes");
 const cors = require("cors");
 require("./cron/contestCron");
 require("./cron/hackathonCron");
@@ -34,6 +35,7 @@ app.use("/api/contests", contestRoutes);
 app.use("/api/hackathons", hackathonRoutes);
 app.use("/api", feedbackRoutes);
 app.use("/api/reminders", remindMeRoutes);
+// app.use("/api/hackathon-reminders", hackathonReminderRoutes);
 
 app.get("/", (req, res) => {
   res.send("JAI SHREE RAM");
