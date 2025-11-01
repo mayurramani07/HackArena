@@ -5,9 +5,10 @@ const { generateAccessToken, verifyToken } = require("../utils/jwt");
 const cookieOptions = {
   httpOnly: true,
   secure: process.env.NODE_ENV === "production", 
-  sameSite: process.env.NODE_ENV === "production" ? "Strict" : "None",
+  sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
   maxAge: 60 * 60 * 1000, 
 };
+
 
 exports.register = async (req, res) => {
   try {

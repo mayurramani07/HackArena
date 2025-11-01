@@ -14,7 +14,7 @@ exports.getAllContests = async (req, res) => {
 
     const contestsWithReminders = contests.map(c => ({
       ...c,
-      reminder: reminderMap.has(c.id || c._id || c.url), // ✅ match contestId
+      reminder: reminderMap.has(c.id || c._id || c.url), 
     }));
 
     res.json(contestsWithReminders);
