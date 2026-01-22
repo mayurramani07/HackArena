@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LandingNavbar from "../components/LandingNavbar";
+import Chatbot from "../components/Chatbot";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ const LandingPage = () => {
           </button>
         </div>
       </div>
+      <Chatbot />
     </>
   );
 };
