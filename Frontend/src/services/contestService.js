@@ -1,17 +1,20 @@
+const API = import.meta.env.VITE_API_URL;
 
 export const loadContests = async (setContests, setLoading) => {
   try {
-    const res = await fetch("http://localhost:7000/api/contests", {
+    const res = await fetch(`${API}/api/contests`, {
       credentials: "include",
     });
+
     if (!res.ok) throw new Error("Failed to fetch contests");
+
     const data = await res.json();
 
     setContests(
       data.map((c) => ({
         ...c,
-        bookmarked: c.reminder || false, 
-        id: c.url,       
+        bookmarked: c.reminder || false,
+        id: c.url,
       }))
     );
   } catch (err) {
@@ -35,16 +38,21 @@ export const handleVisitContest = (url, isLoggedIn, navigate) => {
 
 export const checkUserAuth = async (setIsLoggedIn, setUser) => {
   try {
-    const res = await fetch("http://localhost:7000/api/auth/check", {
+    const res = await fetch(`${API}/api/auth/check`, {
       credentials: "include",
     });
+
     if (!res.ok) throw new Error("Auth check failed");
+
     const data = await res.json();
+
     setIsLoggedIn(data.loggedIn || false);
+
     if (setUser) setUser(data.user || null);
   } catch (err) {
     console.error("Error checking auth:", err);
     setIsLoggedIn(false);
+
     if (setUser) setUser(null);
   }
 };
