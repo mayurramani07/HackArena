@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "server.js",
- "scripts": {
+  "scripts": {
     "start": "node server.js",
     "dev": "npx nodemon server.js"
   },
@@ -23,6 +23,7 @@
     "mongoose": "^8.17.1",
     "node-cron": "^4.2.1",
     "node-schedule": "^2.1.1",
+    "nodemailer": "^8.0.7",
     "puppeteer": "^24.16.2",
     "xml2js": "^0.6.2"
   }
