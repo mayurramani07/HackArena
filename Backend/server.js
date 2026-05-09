@@ -8,9 +8,11 @@ const cookieParser = require("cookie-parser");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const remindMeRoutes = require("./routes/remindMeRoutes");
 // const hackathonReminderRoutes = require("./routes/hackathonReminderRoutes");
+
 const cors = require("cors");
 require("./cron/contestCron");
 require("./cron/hackathonCron");
+require("dotenv").config();
 
 dotenv.config();
 connectDB();

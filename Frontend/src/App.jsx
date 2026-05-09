@@ -5,7 +5,6 @@ import HackathonPage from "./pages/HackathonPage";
 import Login from "./pages/LoginPage";
 import Signup from "./pages/SignupPage";
 import Feedback from "./pages/Feedbackpage";
-import Chatbot from "./components/Chatbot";
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/hackathons" element={<HackathonPage/>} />
         <Route path="/feedback" element={<Feedback/>}/>
-        <Route path="/Chatbot" element={<Chatbot/>} />
       </Routes>
     </Router>
   );

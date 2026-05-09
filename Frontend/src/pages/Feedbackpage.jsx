@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 // import Footer from "../components/Footer";
 
 const FeedbackPage = () => {
+
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,9 +34,17 @@ const FeedbackPage = () => {
 
     try {
       setLoading(true);
+
       await axios.post("http://localhost:7000/api/feedback", formData);
+
       setSubmitted(true);
-      setFormData({ name: "", email: "", feedback: "" });
+
+      setFormData({
+        name: "",
+        email: "",
+        feedback: "",
+      });
+
     } catch (err) {
       setErrorMessage("Something went wrong. Please try again.");
     } finally {
@@ -40,12 +53,28 @@ const FeedbackPage = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-black text-white grid place-items-center p-4">
+    <div className="relative min-h-screen w-full bg-black text-white grid place-items-center p-4">
+
+      {/* Back Button */}
+      <button
+        onClick={() => navigate(-1)}
+        className="absolute top-4 left-4 flex items-center gap-1 text-white hover:text-gray-300"
+      >
+        <ArrowLeft size={18} />
+        <span className="text-sm">Back</span>
+      </button>
+
       <div className="w-full max-w-md">
         <div className="bg-white text-black rounded-2xl shadow-xl p-6 sm:p-8">
+
           <div className="mb-6 text-center">
-            <h1 className="text-2xl sm:text-3xl font-bold">HackArena</h1>
-            <p className="text-sm text-neutral-600 mt-1">We value your feedback</p>
+            <h1 className="text-2xl sm:text-3xl font-bold">
+              HackArena
+            </h1>
+
+            <p className="text-sm text-neutral-600 mt-1">
+              We value your feedback
+            </p>
           </div>
 
           {errorMessage && (
@@ -56,12 +85,16 @@ const FeedbackPage = () => {
 
           {submitted ? (
             <p className="text-green-600 text-center font-medium">
-              Thank you for your feedback! We’ll use it to improve HackArena 
+              Thank you for your feedback! We’ll use it to improve HackArena
             </p>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+
               <label className="block">
-                <span className="mb-1 block text-sm font-medium">Name</span>
+                <span className="mb-1 block text-sm font-medium">
+                  Name
+                </span>
+
                 <div className="rounded-xl border border-neutral-200 bg-white px-3 py-2 focus-within:ring-2 focus-within:ring-black/80">
                   <input
                     type="text"
@@ -75,7 +108,10 @@ const FeedbackPage = () => {
               </label>
 
               <label className="block">
-                <span className="mb-1 block text-sm font-medium">Email</span>
+                <span className="mb-1 block text-sm font-medium">
+                  Email
+                </span>
+
                 <div className="rounded-xl border border-neutral-200 bg-white px-3 py-2 focus-within:ring-2 focus-within:ring-black/80">
                   <input
                     type="email"
@@ -89,7 +125,10 @@ const FeedbackPage = () => {
               </label>
 
               <label className="block">
-                <span className="mb-1 block text-sm font-medium">Feedback</span>
+                <span className="mb-1 block text-sm font-medium">
+                  Feedback
+                </span>
+
                 <div className="rounded-xl border border-neutral-200 bg-white px-3 py-2 focus-within:ring-2 focus-within:ring-black/80">
                   <textarea
                     name="feedback"
@@ -109,6 +148,7 @@ const FeedbackPage = () => {
               >
                 {loading ? "Sending…" : "Submit Feedback"}
               </button>
+
             </form>
           )}
         </div>
