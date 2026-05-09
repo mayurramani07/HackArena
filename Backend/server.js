@@ -26,7 +26,7 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? "https://deploySoon.com" 
+        ? "https://hack-arena-evz6.vercel.app" 
         : "http://localhost:5173",
     credentials: true, 
   })
