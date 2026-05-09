@@ -14,9 +14,9 @@ const LandingNavbar = () => {
           <Link to="/feedback" className="text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all">
             Give Feedback
           </Link>
-          <a href='#developer' className='text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all'>
+          {/* <a href='#developer' className='text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all'>
             About Developer
-          </a>
+          </a> */}
         </div>
 
         <div className='md:hidden text-white text-2xl cursor-pointer' onClick={() => setIsOpen(!isOpen)}>
@@ -29,9 +29,9 @@ const LandingNavbar = () => {
           <Link onClick={() => setIsOpen(false)} to="/feedback" className="text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all">
             Give Feedback
           </Link>
-          <a onClick={() => setIsOpen(false)} href='#developer' className='text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all'>
+          {/* <a onClick={() => setIsOpen(false)} href='#developer' className='text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all'>
             About Developer
-          </a>
+          </a> */}
         </div>
       )}
     </nav>

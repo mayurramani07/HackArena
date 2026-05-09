@@ -53,10 +53,10 @@ const Navbar = () => {
                 className="text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all">
                 Signup
               </Link>
-              <Link to="/more"
+              {/* <Link to="/more"
                 className="text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all">
                 Explore More
-              </Link>
+              </Link> */}
             </>
           )}
         </div>
@@ -88,11 +88,11 @@ const Navbar = () => {
                 className="text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all">
                 Signup
               </Link>
-              <Link onClick={() => setIsOpen(false)}
+              {/* <Link onClick={() => setIsOpen(false)}
                 to="/more"
                 className="text-sm text-white font-medium uppercase tracking-tight hover:text-gray-400 transition-all">
                 Explore More
-              </Link>
+              </Link> */}
             </>
           )}
         </div>
